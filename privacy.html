@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy Policy — 90-Minute Reads</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="brand">
+          <a class="logo-word" style="text-decoration:none" href="./">Union Arc Romcoms</a>
+          <span class="logo-sub">A 90‑Minute Romcom</span>
+        </div>
+      </div>
+    </header>
+    <main class="container" style="padding:2rem 0 3rem">
+      <h1>Privacy Policy</h1>
+      <p class="muted small">Last updated <span id="pp-year"></span></p>
+      <p>
+        This is a simple placeholder privacy policy. Replace with your actual policy. If you use MailerLite for email subscriptions, please
+        review their data processing terms and include relevant disclosures.
+      </p>
+      <h2>What we collect</h2>
+      <ul>
+        <li>Email address when you subscribe to the newsletter.</li>
+        <li>Basic analytics (if enabled) to understand page visits.</li>
+      </ul>
+      <h2>How we use data</h2>
+      <ul>
+        <li>To send newsletters and bonus content you requested.</li>
+        <li>To improve the website experience.</li>
+      </ul>
+      <h2>Your choices</h2>
+      <ul>
+        <li>You can unsubscribe at any time via the link in any email.</li>
+        <li>Contact us to request data deletion.</li>
+      </ul>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+  <div>© <span id="year"></span> Union Arc Romcoms</div>
+        <div class="footer-links">
+          <a href="./">Home</a>
+        </div>
+      </div>
+    </footer>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+      document.getElementById('pp-year').textContent = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+    </script>
+  </body>
+  </html>
