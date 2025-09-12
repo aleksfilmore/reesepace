@@ -605,9 +605,9 @@ body {
 
 .love-list li {
   position: relative;
-  padding: 2rem;
+  padding: 2rem 2rem 2rem 3.5rem;
   background: 
-    linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+    linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 100%);
   border: 1px solid var(--glass-fog);
   border-radius: var(--radius-organic);
   font-size: 1.05rem;
@@ -615,63 +615,51 @@ body {
   color: var(--text-soft);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
+  border-left: 4px solid var(--accent-warm);
 }
 
 .love-list li::before {
-  content: '✓';
+  content: '♥';
   position: absolute;
-  top: 1.5rem;
+  top: 2rem;
   left: 1.5rem;
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   background: linear-gradient(135deg, var(--accent-warm) 0%, var(--accent-metal) 100%);
   color: var(--paper-warm);
   border-radius: 50%;
   display: grid;
   place-items: center;
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 400;
   box-shadow: var(--shadow-intimate);
 }
 
 .love-list li:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-ceramic);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%);
+  border-left-color: var(--copper-patina);
 }
 
-.content-notes,
 .reading-time {
   background: 
-    linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.3) 100%);
-  border: 1px solid var(--glass-fog);
+    linear-gradient(135deg, rgba(160, 67, 42, 0.1) 0%, rgba(184, 92, 62, 0.05) 100%);
+  border: 1px solid var(--accent-warm);
   border-radius: var(--radius-organic);
   padding: 2.5rem;
   backdrop-filter: blur(8px);
   text-align: center;
-}
-
-.content-notes h3 {
-  margin: 0 0 1rem;
-  font-size: 1.1rem;
-  color: var(--text-primary);
-  font-weight: 600;
-  font-family: var(--font-display);
-}
-
-.content-notes p {
-  margin: 0;
-  color: var(--text-soft);
-  font-size: 0.95rem;
-  line-height: 1.6;
+  margin-top: 2rem;
 }
 
 .reading-time p {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: var(--accent-warm);
   font-weight: 600;
   font-style: italic;
+  font-family: var(--font-display);
 }
 
 /* Signup - Warm & Inviting */
@@ -1051,34 +1039,56 @@ p {
 .market-showcase {
   background: 
     linear-gradient(135deg, 
-      var(--accent-warm) 0%, 
-      var(--accent-metal) 40%, 
-      var(--clay-fired) 100%);
+      var(--night-chicago) 0%, 
+      var(--coffee-steam) 35%, 
+      var(--market-glow) 70%,
+      var(--brick-shadow) 100%);
   border-radius: var(--radius-organic);
   padding: 0;
   margin: 0 auto 4rem;
   max-width: 1000px;
-  box-shadow: var(--shadow-ceramic);
+  box-shadow: var(--shadow-night);
   position: relative;
   overflow: hidden;
+}
+
+.market-showcase::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--texture-clay);
+  opacity: 0.15;
+  z-index: 1;
 }
 
 .market-visual {
   position: relative;
+  z-index: 2;
 }
 
 .market-image {
   position: relative;
-  height: 320px;
+  height: 400px;
   overflow: hidden;
   border-radius: var(--radius-organic) var(--radius-organic) 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: 
+    radial-gradient(ellipse at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
 }
 
 .market-illustration {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  width: 80%;
+  max-width: 500px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(31, 27, 26, 0.3));
+  z-index: 3;
+  position: relative;
 }
 
 .market-overlay {
@@ -1086,18 +1096,19 @@ p {
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(transparent 0%, rgba(31, 27, 26, 0.85) 100%);
+  background: linear-gradient(transparent 0%, rgba(31, 27, 26, 0.9) 100%);
   padding: 3rem;
   color: var(--paper-warm);
   text-align: center;
+  z-index: 4;
 }
 
 .market-overlay h3 {
   margin: 0 0 0.75rem;
-  font-size: 2rem;
+  font-size: 2.2rem;
   color: var(--paper-warm);
   font-weight: 600;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
   font-family: var(--font-display);
 }
 
@@ -1108,14 +1119,17 @@ p {
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
 }
 
 .market-details {
   display: grid;
   gap: 1.5rem;
   padding: 3rem;
-  background: rgba(255, 255, 255, 0.4);
+  background: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+  z-index: 2;
+  position: relative;
 }
 
 .market-feature {
@@ -1123,16 +1137,17 @@ p {
   align-items: flex-start;
   gap: 1.5rem;
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.8);
   border-radius: var(--radius-soft);
   border: 1px solid var(--glass-fog);
   transition: all 0.4s ease;
+  box-shadow: var(--shadow-intimate);
 }
 
 .market-feature:hover {
   transform: translateY(-3px);
-  box-shadow: var(--shadow-intimate);
-  background: rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-ceramic);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .feature-icon {
