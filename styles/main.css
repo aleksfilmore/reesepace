@@ -92,7 +92,6 @@ body {
   right: 0;
   height: 40px;
   background: 
-    url('../assets/images/Chicago.png') center bottom/auto 30px no-repeat,
     linear-gradient(90deg, 
       transparent 0%, 
       var(--market-brick) 15%, 
@@ -398,9 +397,77 @@ body {
 
 .synopsis-grid { 
   display: grid; 
-  grid-template-columns: 2fr 1fr; 
-  gap: 3rem; 
-  align-items: start;
+  grid-template-columns: 1fr; 
+  gap: 2rem; 
+  max-width: 50rem;
+  margin: 0 auto;
+}
+
+/* New synopsis content styles */
+.synopsis .book-tagline .h4 {
+  color: var(--market-copper);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  line-height: 1.3;
+}
+
+.synopsis .plot-summary p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.synopsis .finale {
+  font-weight: 600;
+  color: var(--market-brick);
+  font-style: italic;
+}
+
+.synopsis .reading-promise,
+.synopsis .tropes-vibes,
+.synopsis .content-notes,
+.synopsis .series-info {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--stroke);
+}
+
+.synopsis .love-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.synopsis .love-list li {
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.synopsis .love-list li::before {
+  content: '•';
+  color: var(--market-copper);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+.synopsis .setting-note {
+  font-style: italic;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+.synopsis .reading-time {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--market-copper);
+  text-align: center;
+}
+
+.synopsis .reading-time .h5 {
+  color: var(--market-brick);
+  font-weight: 600;
 }
 
 .blurb { 
@@ -532,6 +599,33 @@ input[type="email"]:focus {
   margin-top: 1rem; 
   color: var(--ink-medium); 
   font-size: 0.9rem;
+  padding: 0.75rem;
+  border-radius: var(--radius);
+  font-weight: 500;
+  text-align: center;
+}
+
+.form-msg.success {
+  background: #d1f2d1;
+  color: #0f5132;
+  border: 1px solid #badbcc;
+}
+
+.form-msg.error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Loading state for form */
+.signup-form form[data-loading="true"] {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.signup-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .privacy-hint { 
@@ -590,7 +684,11 @@ input[type="email"]:focus {
 
 .market-showcase {
   background: 
-    linear-gradient(135deg, var(--card) 0%, var(--bg-warm) 100%);
+    linear-gradient(135deg, 
+      var(--market-brick) 0%, 
+      var(--market-copper) 30%, 
+      var(--market-gold) 70%, 
+      var(--bg-warm) 100%);
   border: 1px solid var(--stroke);
   border-radius: var(--radius-lg);
   padding: 0;
@@ -916,29 +1014,10 @@ input[type="email"]:focus {
 .site-footer { 
   border-top: 1px solid var(--stroke); 
   padding: 2rem 0; 
-  background: 
-    url('../assets/images/Chicago.png') center top/auto 60px no-repeat,
-    var(--card);
-  background-position: center 1rem;
-  position: relative;
+  background: var(--card);
 }
 
-.site-footer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.85);
-  z-index: 1;
-}
 
-.footer-inner,
-.footer-disclaimer {
-  position: relative;
-  z-index: 2;
-}
 
 .footer-inner { 
   display: flex; 
