@@ -3,11 +3,14 @@
 
 class MailerLiteIntegration {
   constructor() {
-    this.apiToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMWUwZmQ4NDAwY2MyZGJjNGZjZWJlZDhmZjBjNzk4MzhkNzZmZDllYjM1ZWU4OTI5YmEyMjNhZmU2NjVjZjUzMTA3NzAyOWYxMTc0OGFhZWQiLCJpYXQiOjE3NTc2ODMyMjcuNjEyODQ4LCJuYmYiOjE3NTc2ODMyMjcuNjEyODUxLCJleHAiOjQ5MTMzNTY4MjcuNjA3Nzk3LCJzdWIiOiIxODA4MTA5Iiwic2NvcGVzIjpbXX0.bLgg_7eK1EnWaWc4dJP0kOfoUdTAN9DrjYy8uDrvG9OVMvMb_EemgrgB52Wmryu2hYhogQbc4Spwo3CYsbnkrYs8USWql9KhGXzt0iR38dBd5FAT9kGcJ718nuT1tpMZh0Ay0Mi3UqB6n4xZasoUx5hziAcdabblauef0yNxUWLNC4ujbwNoYqATC4jexdZQJiiMjL5W8t7sOPkhwwWS82j85cefpf9-Gfgm7kYVYgbqHNKLLIYf8dMUkUbkOFFYpKO5x9VGcBtHMr3LR6IpWpUsjcC1phxmaTOrvH94TODLNCBHaEI2Cix96fqAAiX7zINtIW8xgGU2vuPhz_oew6UNePJWKRbTmhRxIgjgM59T_UBAnXWt7cY1OjaEpa3QnRhmRzrARudcwdkxP9gSgvtSjCrO2e9jk4WxdKKB_Fa1fze7C9hLQkf3b19PlJWkUDe5hxO-WG_5ioHeqJRxuinJZwnjhPW13L9k5v1gLNUdcbg2VBVfsazwZ9g1S5CDUIQOMFq9yGIXtVx-Bm2LIScnLcc0py1vAqL2V_sdW3zMQWXkIFPx5cUxQXzblmXofnoPJUZSIF2qp42p9znHkg2zYfx754V-d--mV6YhpTvzcRNFOLnJD_FWaaXzqqiHBYD2kZKaS299xli8lyyHpzulRRRjfpfzfS_MYw7CAYw';
+    // IMPORTANT: Do not hardcode secrets in client-side code.
+    // Expect an API token to be injected via server-side templating or environment at build time.
+    // For static hosting, prefer using MailerLite embedded forms instead of direct API calls.
+    this.apiToken = (window.ML_API_TOKEN || '').trim();
     this.apiBase = 'https://connect.mailerlite.com/api';
     this.groupId = null; // Will be set after creating/getting the group
     this.automationId = null; // Will be set after creating the automation
-    
+
     this.init();
   }
 
@@ -19,6 +22,11 @@ class MailerLiteIntegration {
 
   // Create or get the subscriber group for Best Efforts readers
   async setupGroup() {
+    // If no API token, skip remote calls and keep UX graceful
+    if (!this.apiToken) {
+      console.warn('[MailerLite] No API token configured. Using local success fallback.');
+      return;
+    }
     try {
       const response = await fetch(`${this.apiBase}/groups`, {
         method: 'POST',
@@ -48,7 +56,8 @@ class MailerLiteIntegration {
   }
 
   async findExistingGroup() {
-    try {
+  if (!this.apiToken) return; // Skip when token missing
+  try {
       const response = await fetch(`${this.apiBase}/groups`, {
         method: 'GET',
         headers: {
@@ -88,7 +97,7 @@ class MailerLiteIntegration {
 
   // Subscribe a user to the newsletter
   async subscribeUser(email, firstName = '', lastName = '') {
-    if (!this.groupId) {
+  if (!this.groupId) {
       throw new Error('Group not initialized');
     }
 
@@ -102,7 +111,7 @@ class MailerLiteIntegration {
       if (firstName) subscriberData.fields = { name: firstName };
       if (lastName && subscriberData.fields) subscriberData.fields.last_name = lastName;
 
-      const response = await fetch(`${this.apiBase}/subscribers`, {
+  const response = await fetch(`${this.apiBase}/subscribers`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -129,7 +138,7 @@ class MailerLiteIntegration {
 
   // Attach form submission handler
   attachFormHandler() {
-    const form = document.getElementById('newsletter-signup-form');
+  const form = document.getElementById('newsletter-signup-form');
     if (!form) {
       console.error('Newsletter form not found');
       return;
@@ -152,18 +161,23 @@ class MailerLiteIntegration {
       submitBtn.textContent = 'Sending...';
       
       try {
-        const result = await this.subscribeUser(emailInput.value);
-        
-        if (result.success) {
+        if (!this.apiToken) {
+          // Dev/static fallback: pretend success for UX testing
           this.showMessage(messageEl, '🎉 Success! Check your inbox for the bonus scene.', 'success');
+          this.trackSignup(emailInput.value);
           emailInput.value = '';
           submitBtn.textContent = 'Sent!';
-          
-          // Track the signup event
-          this.trackSignup(emailInput.value);
         } else {
-          this.showMessage(messageEl, result.error || 'Something went wrong. Please try again.', 'error');
-          submitBtn.textContent = 'Send me the bonus';
+          const result = await this.subscribeUser(emailInput.value);
+          if (result.success) {
+            this.showMessage(messageEl, '🎉 Success! Check your inbox for the bonus scene.', 'success');
+            emailInput.value = '';
+            submitBtn.textContent = 'Sent!';
+            this.trackSignup(emailInput.value);
+          } else {
+            this.showMessage(messageEl, result.error || 'Something went wrong. Please try again.', 'error');
+            submitBtn.textContent = 'Send me the bonus';
+          }
         }
       } catch (error) {
         this.showMessage(messageEl, 'Network error. Please check your connection and try again.', 'error');

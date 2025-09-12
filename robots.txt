@@ -1,0 +1,5 @@
+# Robots policy for reesepace.com
+User-agent: *
+Allow: /
+
+Sitemap: https://reesepace.com/sitemap.xml
