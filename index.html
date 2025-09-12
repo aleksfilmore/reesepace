@@ -102,15 +102,12 @@
           <p>Join the newsletter and receive the exclusive bonus scene from Best Efforts straight to your inbox.</p>
         </div>
         <div class="signup-form">
-          <!-- Paste your MailerLite embed here. Example: -->
-          <!-- <div class="ml-embed">...Mailerlite embed code...</div> -->
-
-          <!-- Fallback form for local preview (remove when embedding MailerLite) -->
-          <form id="fallback-form" aria-label="Newsletter signup (demo)">
+          <!-- MailerLite Integration Form -->
+          <form id="newsletter-signup-form" aria-label="Newsletter signup">
             <label class="visually-hidden" for="email">Email address</label>
             <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Email address" required />
             <button type="submit" class="btn btn-primary">Send me the bonus</button>
-            <p id="form-msg" class="form-msg" role="status" aria-live="polite"></p>
+            <p id="form-msg" class="form-msg" role="status" aria-live="polite" style="display: none;"></p>
           </form>
         </div>
       </div>
@@ -233,5 +230,6 @@
     </footer>
 
     <script src="./scripts/main.js"></script>
+    <script src="./scripts/mailerlite-integration.js"></script>
   </body>
-  </html>
+</html>

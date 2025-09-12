@@ -628,6 +628,11 @@ input[type="email"]:focus {
   height: 300px;
   overflow: hidden;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background: linear-gradient(135deg, 
+    var(--brick-red) 0%, 
+    var(--copper) 30%, 
+    var(--steel-blue) 70%, 
+    var(--charcoal) 100%);
 }
 
 .market-illustration {
