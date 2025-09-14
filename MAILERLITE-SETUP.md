@@ -50,7 +50,7 @@ This guide will help you set up an automated welcome email that sends the bonus 
     
     <h3 style="color: #A0432A;">Coming up in the Union Arc series:</h3>
     <p style="line-height: 1.6;">
-      ✨ <strong>Force Majeure</strong> (Ava & Marco) - Coming 2025<br>
+      ✨ <strong>Force Majeure (MM)</strong> (Micah & Rafi) - Coming 2025<br>
       ✨ <strong>Fire Code</strong> (Rae & Captain Ramirez) - Coming 2025<br>
       ✨ <strong>Shared Usage</strong> (Eddie & Nadia) - Coming 2025
     </p>
@@ -91,7 +91,7 @@ What you can expect from this newsletter:
 • Special subscriber-only deals
 
 Coming up in the Union Arc series:
-✨ Force Majeure (Ava & Marco) - Coming 2025
+✨ Force Majeure (MM) (Micah & Rafi) - Coming 2025
 ✨ Fire Code (Rae & Captain Ramirez) - Coming 2025
 ✨ Shared Usage (Eddie & Nadia) - Coming 2025
 
