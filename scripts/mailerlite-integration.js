@@ -48,13 +48,17 @@ class MailerLiteIntegration {
       if (response.ok) {
         const group = await response.json();
         this.groupId = group.data.id;
-        console.log('✅ Subscriber group created/found:', this.groupId);
+        console.log('✅ Subscriber group created:', this.groupId);
       } else if (response.status === 422) {
-        // Group might already exist, try to find it
+        // Group likely already exists, try to find it
+        console.log('📋 Group may already exist, searching for existing group...');
         await this.findExistingGroup();
       } else {
-        console.error('❌ Failed to create/find subscriber group:', response.status);
-        throw new Error(`API Error: ${response.status}`);
+        console.error('❌ Failed to create subscriber group:', response.status);
+        const errorData = await response.json().catch(() => null);
+        console.error('Error details:', errorData);
+        // Still try to find existing group as fallback
+        await this.findExistingGroup();
       }
     } catch (error) {
       console.error('Error setting up group:', error);
@@ -63,8 +67,9 @@ class MailerLiteIntegration {
   }
 
   async findExistingGroup() {
-  if (!this.apiToken) return; // Skip when token missing
-  try {
+    if (!this.apiToken || this.apiToken === 'YOUR_MAILERLITE_API_TOKEN') return;
+    
+    try {
       const response = await fetch(`${this.apiBase}/groups`, {
         method: 'GET',
         headers: {
@@ -75,18 +80,34 @@ class MailerLiteIntegration {
 
       if (response.ok) {
         const groups = await response.json();
-        const bonusGroup = groups.data.find(group => 
-          group.name.includes('Best Efforts') || group.name.includes('Bonus Scene')
+        console.log('📁 Available groups:', groups.data.map(g => ({ id: g.id, name: g.name })));
+        
+        // Look for the exact group name first
+        let bonusGroup = groups.data.find(group => 
+          group.name === 'Best Efforts Bonus Scene Subscribers'
         );
+        
+        // If not found, look for partial matches
+        if (!bonusGroup) {
+          bonusGroup = groups.data.find(group => 
+            group.name.includes('Best Efforts') || 
+            group.name.includes('Bonus Scene') ||
+            group.name.includes('Newsletter')
+          );
+        }
         
         if (bonusGroup) {
           this.groupId = bonusGroup.id;
-          console.log('✅ Found existing group:', this.groupId);
+          console.log('✅ Found existing group:', bonusGroup.name, '(ID:', this.groupId, ')');
+        } else if (groups.data.length > 0) {
+          // Use the first available group as fallback
+          this.groupId = groups.data[0].id;
+          console.log('📝 Using fallback group:', groups.data[0].name, '(ID:', this.groupId, ')');
         } else {
-          // Use the first available group or create default
-          this.groupId = groups.data[0]?.id || null;
-          console.log('📝 Using default group:', this.groupId);
+          console.warn('⚠️ No groups found in MailerLite account');
         }
+      } else {
+        console.error('❌ Failed to fetch groups:', response.status);
       }
     } catch (error) {
       console.error('Error finding groups:', error);
