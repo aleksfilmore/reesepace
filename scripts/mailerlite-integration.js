@@ -23,8 +23,12 @@ class MailerLiteIntegration {
   // Create or get the subscriber group for Best Efforts readers
   async setupGroup() {
     // If no API token, skip remote calls and keep UX graceful
-    if (!this.apiToken) {
-      console.warn('[MailerLite] No API token configured. Using local success fallback.');
+    if (!this.apiToken || this.apiToken === 'YOUR_MAILERLITE_API_TOKEN') {
+      console.warn('🔑 MailerLite API token not configured.');
+      console.log('📋 To enable automatic email delivery:');
+      console.log('1. Get your API token from https://dashboard.mailerlite.com/integrations/api');
+      console.log('2. Replace "YOUR_MAILERLITE_API_TOKEN" in the HTML with your actual token');
+      console.log('3. Consider using MailerLite embedded forms for better security');
       return;
     }
     try {
@@ -48,6 +52,9 @@ class MailerLiteIntegration {
       } else if (response.status === 422) {
         // Group might already exist, try to find it
         await this.findExistingGroup();
+      } else {
+        console.error('❌ Failed to create/find subscriber group:', response.status);
+        throw new Error(`API Error: ${response.status}`);
       }
     } catch (error) {
       console.error('Error setting up group:', error);
@@ -161,12 +168,11 @@ class MailerLiteIntegration {
       submitBtn.textContent = 'Sending...';
       
       try {
-        if (!this.apiToken) {
-          // Dev/static fallback: pretend success for UX testing
-          this.showMessage(messageEl, '🎉 Success! Check your inbox for the bonus scene.', 'success');
-          this.trackSignup(emailInput.value);
-          emailInput.value = '';
-          submitBtn.textContent = 'Sent!';
+        if (!this.apiToken || this.apiToken === 'YOUR_MAILERLITE_API_TOKEN') {
+          // Show helpful message when API is not configured
+          this.showMessage(messageEl, '⚠️ MailerLite API not configured. Please contact support@reesepace.com for your bonus scene.', 'warning');
+          console.log('💡 To enable automatic delivery, configure your MailerLite API token in the HTML file.');
+          submitBtn.textContent = 'Contact Support';
         } else {
           const result = await this.subscribeUser(emailInput.value);
           if (result.success) {

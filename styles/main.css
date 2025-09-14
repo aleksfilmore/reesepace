@@ -1120,6 +1120,12 @@ input[type="email"]::placeholder {
   border: 1px solid rgba(244, 67, 54, 0.3);
 }
 
+.form-msg.warning {
+  background: rgba(255, 152, 0, 0.1);
+  color: #e65100;
+  border: 1px solid rgba(255, 152, 0, 0.3);
+}
+
 /* Loading state for form */
 .signup-form form[data-loading="true"] {
   opacity: 0.7;
