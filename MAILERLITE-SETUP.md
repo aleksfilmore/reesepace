@@ -17,7 +17,59 @@ This guide will help you set up an automated welcome email that sends the bonus 
 **Subject Line:** 🔥 Your spicy bonus scene from Best Efforts is here!
 
 **From Name:** Reese Pace
-**From Email:** reese@reesepace.com (update with your actual email)
+**From Email:** reesepace@yahoo.com (or reese@reesepace.com with proper domain authentication)
+
+## 📮 Email Deliverability Tips
+
+### Sender Email Options
+
+**Option 1: reesepace@yahoo.com (Recommended for immediate use)**
+- ✅ Established domain reputation
+- ✅ Less likely to hit spam folders initially
+- ❌ Less professional appearance
+- ❌ Doesn't match your brand domain
+
+**Option 2: reese@reesepace.com (Better long-term)**
+- ✅ Professional, brand-consistent
+- ✅ Builds your domain reputation
+- ❌ Requires proper email authentication setup
+- ❌ May have deliverability issues initially
+
+### Improving Email Deliverability
+
+1. **Domain Authentication (Recommended for reese@reesepace.com):**
+   - Set up SPF record in your DNS
+   - Configure DKIM signing in MailerLite
+   - Add DMARC policy for your domain
+   - MailerLite provides these settings in their dashboard
+
+2. **Content Optimization:**
+   - Avoid spam trigger words (FREE, URGENT, etc.)
+   - Balance text-to-image ratio
+   - Include a clear unsubscribe link
+   - Use a recognizable sender name
+
+3. **List Management:**
+   - Only send to engaged subscribers
+   - Remove bounced emails promptly
+   - Use double opt-in for new subscribers
+   - Monitor spam complaints
+
+4. **Gradual Warm-up:**
+   - Start with small batches of emails
+   - Gradually increase volume over time
+   - Monitor engagement rates
+
+### Subject Line Best Practices
+- Keep under 50 characters
+- Avoid ALL CAPS or excessive punctuation
+- Make it personal and relevant
+- Test different versions
+
+**Recommended Subject Lines:**
+- "Your Best Efforts bonus scene is here! 📖"
+- "Welcome! Here's your exclusive bonus chapter"
+- "Thanks for joining - your bonus scene awaits"
 
 **Email Body (HTML):**
 ```html

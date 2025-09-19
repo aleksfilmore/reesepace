@@ -2741,3 +2741,126 @@ p {
 }
 
 /* Cover-inspired theme overrides */
+
+/* Stores Section */
+.stores {
+  padding: 5rem 0;
+  background: linear-gradient(135deg, #FFFBF8 0%, #F7F3ED 100%);
+}
+
+.stores-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.stores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.store-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(31, 27, 26, 0.08);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: 1px solid rgba(228, 218, 203, 0.5);
+}
+
+.store-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(31, 27, 26, 0.12);
+  border-color: var(--accent-warm);
+}
+
+.store-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--accent-warm) 0%, var(--accent-clay) 100%);
+  border-radius: 0.5rem;
+}
+
+.store-info {
+  flex: 1;
+}
+
+.store-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.store-description {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.stores-note {
+  margin-top: 3rem;
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.stores-note p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Store-specific accent colors */
+.store-card.amazon:hover { border-color: #ff9900; }
+.store-card.apple:hover { border-color: #007aff; }
+.store-card.google:hover { border-color: #4285f4; }
+.store-card.barnes:hover { border-color: #00a95c; }
+.store-card.bookmate:hover { border-color: #ff6b6b; }
+.store-card.everand:hover { border-color: #1db584; }
+.store-card.overdrive:hover { border-color: #003d82; }
+.store-card.odilo:hover { border-color: #8b5cf6; }
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .stores {
+    padding: 3rem 0;
+  }
+  
+  .stores-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .store-card {
+    padding: 1.25rem;
+  }
+  
+  .store-icon {
+    font-size: 1.75rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  
+  .store-name {
+    font-size: 1rem;
+  }
+  
+  .store-description {
+    font-size: 0.85rem;
+  }
+}
