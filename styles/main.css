@@ -12,13 +12,14 @@
   --glass-fog: #E5E0DA; /* Frosted market windows */
   --paper-warm: #FFFCF8; /* Manuscript pages */
   
-  /* Intimate typography scale */
-  --text-primary: var(--night-chicago);
-  --text-soft: var(--coffee-steam);
-  --text-whisper: var(--market-glow);
-  --surface-main: var(--paper-warm);
-  --surface-soft: var(--studio-concrete);
-  --surface-glow: var(--clay-warm);
+  /* Intimate typography scale - FIXED for proper contrast */
+  --text-primary: var(--night-chicago); /* Dark text */
+  --text-soft: var(--coffee-steam); /* Medium dark text */
+  --text-whisper: var(--market-glow); /* Lighter text */
+  --text-light: var(--paper-warm); /* Light text for dark backgrounds */
+  --surface-main: var(--paper-warm); /* Light background */
+  --surface-soft: var(--studio-concrete); /* Light background variant */
+  --surface-glow: var(--clay-warm); /* Warm light background */
   --accent-warm: var(--brick-shadow);
   --accent-metal: var(--copper-patina);
   /* Literary shadows & ceramic textures */
@@ -63,6 +64,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
+}
+
+.theme-cover {
+  /* Ensure theme is properly applied */
+  background: 
+    var(--texture-clay),
+    linear-gradient(160deg, var(--surface-main) 0%, var(--surface-soft) 60%, var(--surface-glow) 100%);
 }
 
 .container { 
@@ -258,7 +266,7 @@ body {
     var(--night-chicago);
   position: relative;
   overflow: hidden;
-  color: var(--paper-warm);
+  color: var(--text-light); /* Light text on dark background */
 }
 
 .hero::before {
@@ -3113,8 +3121,8 @@ p {
   gap: 1.5rem;
   margin: 1.5rem 0;
   padding: 1rem 0;
-  border-top: 1px solid var(--glass-fog);
-  border-bottom: 1px solid var(--glass-fog);
+  border-top: 1px solid rgba(255, 252, 248, 0.2);
+  border-bottom: 1px solid rgba(255, 252, 248, 0.2);
 }
 
 .trust-item {
@@ -3122,7 +3130,7 @@ p {
   align-items: center;
   gap: 0.5rem;
   font-size: 0.9rem;
-  color: var(--text-soft);
+  color: var(--text-light); /* Light text for dark hero background */
 }
 
 .trust-icon {
@@ -3320,7 +3328,8 @@ a:focus {
   }
 }
 
-/* Dark Mode Support */
+/* Dark Mode Support - Disabled for now to ensure proper light theme */
+/*
 @media (prefers-color-scheme: dark) {
   :root {
     --night-chicago: #F7F5F3;
@@ -3349,6 +3358,7 @@ a:focus {
     background: var(--accent-warm);
   }
 }
+*/
 
 /* Print Styles */
 @media print {
