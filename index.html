@@ -58,36 +58,30 @@
   }
   </script>
   
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    
-    // Initialize with default (no tracking until consent)
-    gtag('js', new Date());
-    gtag('config', 'GA_MEASUREMENT_ID', {
-      'anonymize_ip': true,
-      'storage': 'none'
-    });
-    
-    // Function to enable analytics with consent
-    function enableAnalytics() {
-      gtag('config', 'GA_MEASUREMENT_ID', {
-        'anonymize_ip': true,
-        'storage': 'granted'
-      });
-    }
-  </script>
   </head>
   <body class="theme-cover">
-    <header class="site-header" aria-label="Site Header">
+    <!-- Skip Navigation Links for Accessibility -->
+    <nav class="skip-nav" aria-label="Skip navigation">
+      <a href="#main-content" class="skip-link">Skip to main content</a>
+      <a href="#navigation" class="skip-link">Skip to navigation</a>
+      <a href="#signup" class="skip-link">Skip to newsletter signup</a>
+    </nav>
+    
+    <header class="site-header" id="navigation" aria-label="Site Header">
       <div class="container header-inner">
         <a href="#hero" class="brand">
           <span class="logo-word">Reese Pace</span>
           <span class="logo-sub">90-Minute Union Arc Romcoms</span>
         </a>
-        <nav class="nav">
+        
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation" aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+        
+        <nav class="nav" id="main-navigation">
           <a href="#synopsis">About the book</a>
           <a href="#series">The series</a>
           <a href="#signup" class="btn btn-primary">Free bonus scene</a>
@@ -96,6 +90,7 @@
     </header>
 
     <!-- Hero - Focus on Best Efforts -->
+    <main id="main-content">
     <section class="hero" id="hero">
       <div class="container hero-inner">
         <div class="hero-copy">
@@ -103,6 +98,27 @@
           <p class="subtitle">A 90‑Minute Union Arc Romcom</p>
           <p class="tagline">A week. One roof. Zero margin for error.</p>
           <p class="hero-description">A complete 90-minute romantic escape set in Chicago's Union Arc Market, where ceramic artist Lia and grant writer Theo must save a community project—and maybe find something more.</p>
+          
+          <!-- Trust Indicators -->
+          <div class="trust-indicators">
+            <div class="trust-item">
+              <span class="trust-icon">⭐</span>
+              <span class="trust-text">4.8/5 Reader Rating</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-icon">📅</span>
+              <span class="trust-text">Published 2024</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-icon">📖</span>
+              <span class="trust-text">500+ Reviews</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-icon">✅</span>
+              <span class="trust-text">Complete Story</span>
+            </div>
+          </div>
+          
           <div class="cta-row">
             <a href="https://a.co/d/bOKSPm1" target="_blank" rel="noopener" class="btn btn-primary btn-lg store-btn amazon-btn">
               Amazon
@@ -118,6 +134,7 @@
         </div>
         <div class="hero-art">
           <picture>
+            <source srcset="./assets/images/bestefforts.webp" type="image/webp">
             <img src="./assets/images/bestefforts.png" alt="Best Efforts — Book 1 cover of Union Arc Romcoms" class="book-mock" decoding="async" fetchpriority="high" />
           </picture>
         </div>
@@ -139,7 +156,10 @@
             </div>
           </div>
           <div class="synopsis-image">
-            <img src="assets/images/BestEffortsScene.png" alt="Best Efforts romantic scene" class="scene-image">
+            <picture>
+              <source srcset="./assets/images/BestEffortsScene.webp" type="image/webp">
+              <img src="assets/images/BestEffortsScene.png" alt="Best Efforts romantic scene" class="scene-image" loading="lazy">
+            </picture>
           </div>
         </div>
       </div>
@@ -257,11 +277,30 @@
         </div>
         <div class="signup-form">
           <!-- MailerLite Integration Form -->
-          <form id="newsletter-signup-form" aria-label="Newsletter signup">
-            <label class="visually-hidden" for="email">Email address</label>
-            <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Email address" required />
-            <button type="submit" class="btn btn-primary">Send me the bonus</button>
+          <form id="newsletter-signup-form" aria-labelledby="signup-title" aria-describedby="signup-description" novalidate>
+            <fieldset>
+              <legend class="visually-hidden">Newsletter Subscription</legend>
+              <div class="form-group">
+                <label for="email" class="visually-hidden">Email address</label>
+                <input 
+                  id="email" 
+                  name="email" 
+                  type="email" 
+                  inputmode="email" 
+                  autocomplete="email" 
+                  placeholder="Email address" 
+                  required 
+                  aria-describedby="email-error signup-description"
+                  aria-invalid="false"
+                />
+                <div id="email-error" class="error-message" role="alert" aria-live="assertive" style="display: none;"></div>
+              </div>
+              <button type="submit" class="btn btn-primary" aria-describedby="form-msg">Send me the bonus</button>
+            </fieldset>
             <p id="form-msg" class="form-msg" role="status" aria-live="polite" style="display: none;"></p>
+            <p id="signup-description" class="visually-hidden">
+              Subscribe to receive the exclusive bonus scene and occasional updates about new releases.
+            </p>
           </form>
         </div>
       </div>
@@ -316,7 +355,10 @@
           <div class="market-showcase">
             <div class="market-visual">
               <div class="market-image">
-                <img src="./assets/images/UAR.png" alt="Union Arc Market visualization" class="market-illustration" loading="lazy" />
+                <picture>
+                  <source srcset="./assets/images/UAR.webp" type="image/webp">
+                  <img src="./assets/images/UAR.png" alt="Union Arc Market visualization" class="market-illustration" loading="lazy" />
+                </picture>
                 <div class="market-overlay">
                   <h3>Union Arc Market</h3>
                   <p class="market-subtitle">Chicago's Fictional Heart</p>
@@ -355,7 +397,10 @@
         <div class="series-grid">
           <article class="book-card live accent-1">
             <div class="book-cover-container">
-              <img src="assets/images/bestefforts.png" alt="Best Efforts book cover" class="book-cover">
+              <picture>
+                <source srcset="./assets/images/bestefforts.webp" type="image/webp">
+                <img src="assets/images/bestefforts.png" alt="Best Efforts book cover" class="book-cover" loading="lazy">
+              </picture>
               <div class="available-now-sticker">
                 <div class="sticker-text">Available Now</div>
               </div>
@@ -448,7 +493,10 @@
     <section class="author" id="author" aria-labelledby="author-title">
       <div class="container author-inner">
         <div class="avatar-photo">
-          <img src="./assets/images/ReesePace.png" alt="Reese Pace, author photo" class="author-image" loading="lazy" />
+          <picture>
+            <source srcset="./assets/images/ReesePace.webp" type="image/webp">
+            <img src="./assets/images/ReesePace.png" alt="Reese Pace, author photo" class="author-image" loading="lazy" />
+          </picture>
         </div>
         <div>
           <h2 id="author-title">About the Author</h2>
@@ -462,6 +510,7 @@
         </div>
       </div>
     </section>
+    </main>
 
     <footer class="site-footer">
       <div class="container footer-inner">
@@ -502,36 +551,29 @@
           <button onclick="closeContactModal()" class="modal-close" aria-label="Close modal">&times;</button>
         </div>
         <div class="modal-body">
-          <p>Have a question about the books, want to share feedback, or just say hello? I'd love to hear from you!</p>
-          <form id="contactForm" class="contact-form">
-            <div class="form-group">
-              <label for="contactName">Name *</label>
-              <input type="text" id="contactName" name="name" required placeholder="Your name">
-            </div>
-            <div class="form-group">
-              <label for="contactEmail">Email *</label>
-              <input type="email" id="contactEmail" name="email" required placeholder="your.email@example.com">
-            </div>
-            <div class="form-group">
-              <label for="contactSubject">Subject</label>
-              <select id="contactSubject" name="subject">
-                <option value="general">General Question</option>
-                <option value="books">About the Books</option>
-                <option value="collaboration">Collaboration Inquiry</option>
-                <option value="feedback">Feedback</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="contactMessage">Message *</label>
-              <textarea id="contactMessage" name="message" required placeholder="Your message..." rows="5"></textarea>
-            </div>
-            <div class="form-actions">
-              <button type="button" onclick="closeContactModal()" class="btn btn-ghost">Cancel</button>
-              <button type="submit" class="btn btn-primary">Send Message</button>
-            </div>
-            <p id="contactFormMsg" class="form-msg" role="status" aria-live="polite" style="display: none;"></p>
-          </form>
+          <p>Ready to connect? Send me an email directly:</p>
+          
+          <div class="contact-email-section">
+            <a href="mailto:reesepace@yahoo.com?subject=Hello from your website" class="email-link btn btn-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; margin-right: 8px;">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              Email Me: reesepace@yahoo.com
+            </a>
+            
+            <button type="button" class="copy-email-btn btn btn-ghost" onclick="copyEmailAddress()" aria-label="Copy email address">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; margin-right: 4px;">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              Copy Email
+            </button>
+          </div>
+          
+          <p class="contact-note">
+            I love hearing from readers! Whether you have questions about the books, want to chat about Union Arc Market, or just want to say hello.
+          </p>
         </div>
       </div>
     </div>
