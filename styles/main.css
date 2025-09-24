@@ -1843,6 +1843,30 @@ p {
   transform: scale(0.95);
 }
 
+.coming-soon-sticker {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: linear-gradient(135deg, var(--market-glow) 0%, var(--clay-fired) 100%);
+  color: var(--paper-warm);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(139, 107, 71, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.book-card:hover .coming-soon-sticker {
+  opacity: 0.8;
+  transform: scale(0.95);
+}
+
 /* Alternating placeholder colors */
 .book-card.accent-2 .book-placeholder {
   background: linear-gradient(135deg, #6B8E5A 0%, #4A6939 100%);
